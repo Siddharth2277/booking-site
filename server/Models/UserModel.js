@@ -1,0 +1,106 @@
+import mon from "mongoose"
+
+const userRegisterSchema = mon.Schema({
+    name:{
+        type:String,
+        required:true,
+        min:4,
+        max:20,
+        trim:true,
+    },
+    last_name:{
+        type:String,
+        required:true,
+        min:4,
+        max:20,
+        trim:true,
+    },
+    email:{
+        type:String,
+        required:true,
+        min:12,
+        max:256,
+        unique:true,
+        lowercase:true,
+        trim:true,
+        match:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    },
+    password:{
+        type:String,
+        min:8,
+        max:256,
+        trim:true,
+        required:true,
+    },
+    mobile:{
+        type:[String],
+        trim:true,
+        required:true,
+    },
+    country:{
+        required:true,
+        type:String,
+        trim:true
+    },
+    Fav:{
+        Question:{
+            type:String
+        },
+        Ans:{
+            type:String,
+            trim:true,
+            min:5,
+            max:30
+        }
+    },
+    birthday:{
+        type:Date,
+        required:true,
+        min:'1-1-1950',
+        max:Date.now(),
+    },
+    createdAt:{
+        type:Object,
+        required:true,
+    },
+    verified:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    isActive:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    gender:{
+        type:String,
+        required:true,
+    },
+    limitOFExtinction:{
+        type:Date,
+        expires:"1d",
+        default:Date.now()
+    },
+    count:{
+        type:Number,
+        default:0
+    },
+    randomString:{
+        type:String,
+        required:true,
+    },
+    refreshToken:{
+        type:String,
+        default:false
+    },
+    lastActive:{
+        type:String,
+        default:Date.now()
+    }
+})
+
+const userRegisterSchemaModel = mon.model("Users",userRegisterSchema)
+
+
+export default userRegisterSchemaModel

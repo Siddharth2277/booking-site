@@ -1,0 +1,11 @@
+version : "3"
+services:
+  front-end:
+    build: ./
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/client"
+      - "/client/node_modules"
+    command: npm run start
+
